@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { Router, Route, Link, browserHistory, RouteHandler } from 'react-router'
 import { createStore } from 'redux'
 
+
 var userList = [];
 
 // sample redux stuff
