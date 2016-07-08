@@ -104,12 +104,24 @@ var UsersDetail = React.createClass({
   }
 });
 
+var Ethan = React.createClass({
+    render: function() {
+		var id = this.props.params.id;
+        return (
+                <div>
+                  Ethan route ftw!!!!!  You specified {id}
+                </div>
+        );
+  }
+});
+
 var MainLayout = React.createClass({
     render: function() {
         return (<div>
                   <span>Header:</span>
                   <Link to="/">Home</Link> |
                   <Link to="/users">Users</Link>
+                  <Link to="/Ethan/hello">Ethan!!!</Link>
                   <hr/>
                   <div>
                     <h2>Body Content</h2>
@@ -126,6 +138,7 @@ ReactDOM.render((
       <Route path="/" component={Home} />
       <Route path="/users" component={Users} />
       <Route path="/users/:id" component={UsersDetail} />
+      <Route path="/Ethan/:id" component={Ethan} />
     </Route>
   </Router>
 ), document.getElementById('app'));

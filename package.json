@@ -14,7 +14,7 @@
     "redux": "^3.5.2"
   },
   "scripts": {
-    "build": "babel src -d lib && browserify lib/*.js -o dist/app.js",
+    "build": "babel src -d lib && browserify lib/app.js -o dist/app.js",
     "prestart": "npm run build",
     "start": "http-server -p 5000"
   },
