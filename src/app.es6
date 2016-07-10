@@ -119,7 +119,7 @@ var Ethan = React.createClass({
 
 var AddNameEmail = React.createClass({
     getInitialState: function() {
-      return {name: 'Newperson', email: '@icct.com'};
+      return {name: '', email: '...@icct.com'};
     },
     handleNameChange: function(e) {
       console.log("handling name change... ''" + this.state.name + "''");
@@ -129,10 +129,18 @@ var AddNameEmail = React.createClass({
       console.log("handling email change... ''" + this.state.email + "''");
       this.setState({email: e.target.value});
     },
+    handleSubmit: function(e) {
+      e.preventDefault();
+      console.log("Submitting name: " + this.state.name);
+      console.log("Submitting email: " + this.state.email);
+
+      // TODO:  Save state to Redux
+      this.setState({name: '', email: ''});
+  },
     render: function() {
         return (
                 <div style={{border: '1px solid black'}}>
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                       <span>Name:</span>
                       <input type="text" placeholder="Bob Bobbyson" value={this.state.name}
           onChange={this.handleNameChange}/><br />
