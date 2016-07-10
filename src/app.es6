@@ -118,16 +118,27 @@ var Ethan = React.createClass({
 });
 
 var AddNameEmail = React.createClass({
+    getInitialState: function() {
+      return {name: 'Newperson', email: '@icct.com'};
+    },
+    handleNameChange: function(e) {
+      console.log("handling name change... ''" + this.state.name + "''");
+      this.setState({name: e.target.value});
+    },
+    handleEmailChange: function(e) {
+      console.log("handling email change... ''" + this.state.email + "''");
+      this.setState({email: e.target.value});
+    },
     render: function() {
-
         return (
-                //<div style='border: 1px solid black;'>
                 <div style={{border: '1px solid black'}}>
                     <form>
                       <span>Name:</span>
-                      <input type="text" /><br />
+                      <input type="text" placeholder="Bob Bobbyson" value={this.state.name}
+          onChange={this.handleNameChange}/><br />
                       <span>Email:</span>
-                      <input type="text" />
+                      <input type="text" placeholder="bb@bobbyson.net" value={this.state.email}
+          onChange={this.handleEmailChange}/><br />
                       <input type="submit" value="Submit" />
                     </form>
                 </div>
