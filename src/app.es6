@@ -70,8 +70,7 @@ class Users extends React.Component {
                   return <li><Link to={`/users/${i}`}>{item.name}</Link> - {item.email}</li>
               })}
               </ul>
-              <button onClick={self.clickHandler}>Test Clicker</button>
-              <button onClick={self.reduxDispatch}>Dispatch</button>
+              <AddNameEmail dispatchItem={self.reduxDispatch}/>
             </div>
     );
   }
@@ -86,12 +85,13 @@ class Users extends React.Component {
   reduxDispatch() {
        console.log('dispatched...');
 
-       var newName = AddNameEmail.getCurrentState();
-       var newEmail = "";
+       // this feels wrong.
+       var newName = document.getElementById('newName').value;
+       var newEmail = document.getElementById('newEmail').value;
 
        userStore.dispatch({
          type: 'ADD_USER',
-         user: {name:"dummy dummy", email:'dummy@icct.com'}
+         user: {name:newName, email:newEmail}
        });
   }
 }
@@ -136,8 +136,9 @@ var AddNameEmail = React.createClass({
     },
     handleSubmit: function(e) {
       e.preventDefault();
+      this.props.dispatchItem();
 
-      // TODO:  Save state to Redux
+
       this.setState({name: '', email: ''});
   },
     render: function() {
@@ -145,10 +146,10 @@ var AddNameEmail = React.createClass({
                 <div style={{border: '1px solid black'}}>
                     <form onSubmit={this.handleSubmit}>
                       <span>Name:</span>
-                      <input type="text" placeholder="Bob Bobbyson" value={this.state.name}
+                      <input id="newName" type="text" placeholder="Bob Bobbyson" value={this.state.name}
           onChange={this.handleNameChange}/><br />
                       <span>Email:</span>
-                      <input type="text" placeholder="bb@bobbyson.net" value={this.state.email}
+                      <input id="newEmail" type="text" placeholder="bb@bobbyson.net" value={this.state.email}
           onChange={this.handleEmailChange}/><br />
                       <input type="submit" value="Submit" />
                     </form>
