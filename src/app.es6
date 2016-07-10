@@ -71,6 +71,7 @@ class Users extends React.Component {
               </ul>
               <button onClick={self.clickHandler}>Test Clicker</button>
               <button onClick={self.reduxDispatch}>Dispatch</button>
+              <AddNameEmail />
             </div>
     );
   }
@@ -99,7 +100,6 @@ var UsersDetail = React.createClass({
                 <div>
                   <div>name: {userDetail.name}</div>
                   <div>email: {userDetail.email}</div>
-                  <AddNameEmail />
                 </div>
 
         );
@@ -121,7 +121,8 @@ var AddNameEmail = React.createClass({
     render: function() {
 
         return (
-                <div style='border: 1px solid black;'>
+                //<div style='border: 1px solid black;'>
+                <div style={{border: '1px solid black'}}>
                     <form>
                       <span>Name:</span>
                       <input type="text" /><br />
