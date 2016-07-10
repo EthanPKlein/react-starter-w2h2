@@ -9,18 +9,19 @@ var userList = [];
 // sample redux stuff
 // --------------------------------------------
 // The Reducer Function
-var dummyReducer = function(state, action) {
+var userReducer = function(state, action) {
   if (state === undefined) {
     state = [];
   }
   if (action.type === 'ADD_USER') {
+    console.log(action.user);
     state = action.user;
   }
   return state;
 }
 
 // Create a store by passing in the reducer
-var dummyStore = createStore(dummyReducer);
+var userStore = createStore(userReducer);
 
 //---------------------------------------------
 
@@ -51,10 +52,10 @@ class Users extends React.Component {
     });
 
     // magic of redux here below ,this listens for chagnes to the dummy store and udpates the state
-    dummyStore.subscribe(function() {
+    userStore.subscribe(function() {
       var tmpList = self.state.list;
-      tmpList.push(dummyStore.getState());
-      console.log("getState",dummyStore.getState());
+      tmpList.push(userStore.getState());
+      console.log("getState", userStore.getState());
       self.setState(tmpList);
     });
   }
@@ -84,7 +85,11 @@ class Users extends React.Component {
 
   reduxDispatch() {
        console.log('dispatched...');
-       dummyStore.dispatch({
+
+       var newName = AddNameEmail.getCurrentState();
+       var newEmail = "";
+
+       userStore.dispatch({
          type: 'ADD_USER',
          user: {name:"dummy dummy", email:'dummy@icct.com'}
        });
@@ -118,20 +123,19 @@ var Ethan = React.createClass({
 
 var AddNameEmail = React.createClass({
     getInitialState: function() {
-      return {name: '', email: '...@icct.com'};
+      return {name: '', email: ''};
+    },
+    getCurrentState: function() {
+      return {name: this.state.name, email: this.state.email};
     },
     handleNameChange: function(e) {
-      console.log("handling name change... ''" + this.state.name + "''");
       this.setState({name: e.target.value});
     },
     handleEmailChange: function(e) {
-      console.log("handling email change... ''" + this.state.email + "''");
       this.setState({email: e.target.value});
     },
     handleSubmit: function(e) {
       e.preventDefault();
-      console.log("Submitting name: " + this.state.name);
-      console.log("Submitting email: " + this.state.email);
 
       // TODO:  Save state to Redux
       this.setState({name: '', email: ''});
