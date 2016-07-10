@@ -99,7 +99,9 @@ var UsersDetail = React.createClass({
                 <div>
                   <div>name: {userDetail.name}</div>
                   <div>email: {userDetail.email}</div>
+                  <AddNameEmail />
                 </div>
+
         );
   }
 });
@@ -110,6 +112,23 @@ var Ethan = React.createClass({
         return (
                 <div>
                   Ethan route ftw!!!!!  You specified {id}
+                </div>
+        );
+  }
+});
+
+var AddNameEmail = React.createClass({
+    render: function() {
+
+        return (
+                <div style='border: 1px solid black;'>
+                    <form>
+                      <span>Name:</span>
+                      <input type="text" /><br />
+                      <span>Email:</span>
+                      <input type="text" />
+                      <input type="submit" value="Submit" />
+                    </form>
                 </div>
         );
   }
