@@ -71,7 +71,6 @@ class Users extends React.Component {
               </ul>
               <button onClick={self.clickHandler}>Test Clicker</button>
               <button onClick={self.reduxDispatch}>Dispatch</button>
-              <AddNameEmail />
             </div>
     );
   }
@@ -159,7 +158,8 @@ var MainLayout = React.createClass({
         return (<div>
                   <span>Header:</span>
                   <Link to="/">Home</Link> |
-                  <Link to="/users">Users</Link>
+                  <Link to="/users">Users</Link> |
+                  <Link to="/addUser">Add User</Link> |
                   <Link to="/Ethan/hello">Ethan!!!</Link>
                   <hr/>
                   <div>
@@ -176,6 +176,7 @@ ReactDOM.render((
     <Route component={MainLayout}>
       <Route path="/" component={Home} />
       <Route path="/users" component={Users} />
+      <Route path="/addUser" component={AddNameEmail} />
       <Route path="/users/:id" component={UsersDetail} />
       <Route path="/Ethan/:id" component={Ethan} />
     </Route>
