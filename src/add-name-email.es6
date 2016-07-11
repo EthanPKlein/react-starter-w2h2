@@ -32,3 +32,5 @@ var AddNameEmail = React.createClass({
         );
   }
 });
+
+export default AddNameEmail;
