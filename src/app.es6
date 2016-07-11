@@ -3,6 +3,12 @@ import { render } from 'react-dom'
 import { Router, Route, Link, browserHistory, RouteHandler } from 'react-router'
 import { createStore } from 'redux'
 
+// The following import should work, except I keep getting this exception:
+/*
+  react.js:19718 Uncaught Invariant Violation: Element type is invalid: expected a string
+  (for built-in components) or a class/function (for composite components) but got: undefined.
+*/
+// import { AddNameEmail } from './add-name-email'
 
 var userList = [];
 
@@ -121,43 +127,6 @@ var Ethan = React.createClass({
   }
 });
 
-var AddNameEmail = React.createClass({
-    getInitialState: function() {
-      return {name: '', email: ''};
-    },
-    getCurrentState: function() {
-      return {name: this.state.name, email: this.state.email};
-    },
-    handleNameChange: function(e) {
-      this.setState({name: e.target.value});
-    },
-    handleEmailChange: function(e) {
-      this.setState({email: e.target.value});
-    },
-    handleSubmit: function(e) {
-      e.preventDefault();
-      this.props.dispatchItem();
-
-
-      this.setState({name: '', email: ''});
-  },
-    render: function() {
-        return (
-                <div style={{border: '1px solid black'}}>
-                    <form onSubmit={this.handleSubmit}>
-                      <span>Name:</span>
-                      <input id="newName" type="text" placeholder="Bob Bobbyson" value={this.state.name}
-          onChange={this.handleNameChange}/><br />
-                      <span>Email:</span>
-                      <input id="newEmail" type="text" placeholder="bb@bobbyson.net" value={this.state.email}
-          onChange={this.handleEmailChange}/><br />
-                      <input type="submit" value="Submit" />
-                    </form>
-                </div>
-        );
-  }
-});
-
 var MainLayout = React.createClass({
     render: function() {
         return (<div>
@@ -187,3 +156,40 @@ ReactDOM.render((
     </Route>
   </Router>
 ), document.getElementById('app'));
+
+// This is the code from add-name-email.es6, only here due to a bug when using
+// the impor statement.  See above.
+var AddNameEmail = React.createClass({
+    getInitialState: function() {
+      return {name: '', email: ''};
+    },
+    getCurrentState: function() {
+      return {name: this.state.name, email: this.state.email};
+    },
+    handleNameChange: function(e) {
+      // could do name validation here if desired
+      this.setState({name: e.target.value});
+    },
+    handleEmailChange: function(e) {
+      // could do email validation here if desired, such as requiring proper regex
+      this.setState({email: e.target.value});
+    },
+    handleSubmit: function(e) {
+      e.preventDefault();
+      this.props.dispatchItem();
+      this.setState({name: '', email: ''});
+    },
+    render: function() {
+        return (
+                <div style={{border: '1px solid black'}}>
+                    <form onSubmit={this.handleSubmit}>
+                      <span>Name:</span>
+                      <input id="newName" type="text" placeholder="Bob Bobbyson" value={this.state.name} onChange={this.handleNameChange}/><br />
+                      <span>Email:</span>
+                      <input id="newEmail" type="text" placeholder="bb@bobbyson.net" value={this.state.email} onChange={this.handleEmailChange}/><br />
+                      <input type="submit" value="Submit" />
+                    </form>
+                </div>
+        );
+  }
+});
